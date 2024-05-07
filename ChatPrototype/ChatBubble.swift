@@ -28,7 +28,6 @@ struct ChatBubble: View {
         .frame(maxWidth: .infinity, alignment: isSentByMe ? .trailing : .leading)
         .padding(isSentByMe ? .leading : .trailing)
     }
-    
 }
 
 #Preview {

@@ -8,17 +8,23 @@
 import SwiftUI
 
 struct ContentView: View {
+    let chats: [ChatItem]
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationView {
+            ScrollView {
+                ForEach(chats, id: \.id) { chat in
+                    let isSentByMe = chat.sender.id == users[0].id
+                    ChatBubble(chat: chat, isSentByMe: isSentByMe)
+                        .frame(maxWidth: .infinity, alignment: isSentByMe ? .trailing : .leading)
+                }.padding(.horizontal)
+            }
+            .navigationTitle("The Group Chat")
+            .navigationBarTitleDisplayMode(.inline)
         }
-        .padding()
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView(chats: chats)
 }
